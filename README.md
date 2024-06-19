@@ -23,25 +23,20 @@ You can find the video [here](/02_Marjan/webScraper.mp4).
 
 ### PAP / Flowchart / Structure Diagram
 
-<br>
-<img src="/01_Leonid/m122_lb2_diagram.drawio.png" width="300">
-<br>
+![Diagram](/01_Leonid/m122_lb2_diagram.drawio.png)
 
 Description: The diagram shows the flow of the script from URL input through scraping and parsing of the data to storing it in the database.
 
 ### Test Case
 
-<br>
-<img src="/01_Leonid/m122_lb2_testcase.drawio.png" width="300">
-<br>
+![Test Case](/01_Leonid/m122_lb2_testcase.drawio.png)
 
 Description: The diagram shows how the script reacts in various test cases, including successful and error scenarios.
 
 ### Use Case
 
-<br>
-<img src="/01_Leonid/m122_lb2_usecase.drawio.png" width="300">
-<br>
+![Use Case](/01_Leonid/m122_lb2_usecase.drawio.png)
+
 
 Description: The three diagrams show the flow of the script in various normal scenarios, including input, scraping, and storing the data.
 
