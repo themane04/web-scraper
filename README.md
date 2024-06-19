@@ -1,91 +1,80 @@
-# Modul 122 - Teil 2
+## Purpose of the Script
 
-## Zweck des Skriptes
+The script is designed to extract data from various news websites and store it in a PostgreSQL database. It enables semi-automatic collection of article data, including title, text, publication date, and author.
 
-Das Skript dient dazu, Daten von verschiedenen Nachrichtenwebseiten zu extrahieren und in eine PostgreSQL-Datenbank zu
-speichern. Es ermöglicht die semi-automatische Sammlung von Artikeldaten, einschliesslich Titel, Text,
-Veröffentlichungsdatum und Autor.
+## Goals and Requirements
 
-## Ziele und Anforderungen
+* Semi-automatically (i.e., manually confirmed and executed) scrape news articles from various websites.
+* Store the collected data in a PostgreSQL database.
+* Implement robust error handling (no unexpected errors) and efficient data storage (no unused or unnecessary columns or file types).
 
-Bis zum Zeitpunkt der Abgabe am 18.06.2024 um 14:00 UHR. soll...
+## Approach
 
-* Semi-Automatisches (also manuell bestätigt und ausgeführt) Scraping von Nachrichtenartikeln von verschiedenen
-  Webseiten möglich sein.
-* Speicherung der gesammelten Daten in einer PostgreSQL-Datenbank möglich sein.
-* Robustes Fehlerhandling (keine unerwarteten Fehler) und effiziente Datenspeicherung (Keine unbenutzten oder unnötigen
-  Columns oder Filetypes) implementiert sein.
+* Develop a Database class to manage the PostgreSQL database.
+* Develop a Scraper class to retrieve and parse HTML content.
+* Implement specific parsing methods for different news websites.
+* Use a switch-case structure to select the appropriate scraper based on the URL.
 
-## Vorgehen
-
-* Entwicklung einer Database-Klasse zur Verwaltung der PostgreSQL-Datenbank.
-* Entwicklung einer Scraper-Klasse zum Abrufen und Parsen von HTML-Inhalten.
-* Implementierung von spezifischen Parsing-Methoden für verschiedene Nachrichtenwebseiten.
-* Verwendung einer switch-case-Struktur, um den passenden Scraper basierend auf der URL auszuwählen.
-
-## Diagramme und Video
+## Diagrams and Video
 
 ### Video
 
-Das Video finden Sie [hier](Praxisarbeit_LB2/02_Marjan/webScraper.mp4).
+You can find the video [here](/02_Marjan/webScraper.mp4).
 
-### PAP / Flussdiagramm / Struktogramm
+### PAP / Flowchart / Structure Diagram
 
 <br>
-<img src="Praxisarbeit_LB2/01_Leonid/m122_lb2_diagram.drawio.png" width="300">
+<img src="/01_Leonid/m122_lb2_diagram.drawio.png" width="300">
 <br>
 
-Beschreibung: Das Diagramm zeigt den Ablauf des Skripts von der URL-Eingabe über das Scraping und Parsen der Daten bis
-hin zur Speicherung in der Datenbank.
+Description: The diagram shows the flow of the script from URL input through scraping and parsing of the data to storing it in the database.
 
 ### Test Case
 
 <br>
-<img src="Praxisarbeit_LB2/01_Leonid/m122_lb2_testcase.drawio.png" width="300">
+<img src="/01_Leonid/m122_lb2_testcase.drawio.png" width="300">
 <br>
 
-Beschreibung: Das Diagramm zeigt, wie das Skript in verschiedenen Testfällen reagiert, einschliesslich erfolgreicher und
-fehlerhafter Szenarien.
+Description: The diagram shows how the script reacts in various test cases, including successful and error scenarios.
 
 ### Use Case
 
 <br>
-<img src="Praxisarbeit_LB2/01_Leonid/m122_lb2_usecase.drawio.png" width="300">
+<img src="/01_Leonid/m122_lb2_usecase.drawio.png" width="300">
 <br>
 
-Beschreibung: Die drei Diagramme zeigen den Ablauf des Skripts in verschiedenen normalen Szenarien, einschliesslich
-Eingabe, Scraping und Speicherung der Daten.
+Description: The three diagrams show the flow of the script in various normal scenarios, including input, scraping, and storing the data.
 
-## Skript/Programm
+## Script/Program
 
-### Technologie
+### Technology
 
 * Python
 * PostgreSQL
-* Bibliotheken: requests, BeautifulSoup, psycopg2
+* Libraries: requests, BeautifulSoup, psycopg2
 
-### Ein- und Ausgabe
+### Input and Output
 
-* Eingabe: URLs der Nachrichtenwebseiten über CLI oder File
-* Ausgabe: Gespeicherte Artikeldaten in der PostgreSQL-Datenbank, und im CLI
+* Input: URLs of news websites via CLI or file
+* Output: Stored article data in the PostgreSQL database, and in the CLI
 
-### Kontrollstrukturen
+### Control Structures
 
-* try-except-Blöcke für Fehlerbehandlung bei HTTP-Anfragen
-* switch-case-Struktur zur Auswahl des passenden Scrapers
-* Schleifen zur Verarbeitung mehrerer URLs
+* try-except blocks for error handling in HTTP requests
+* switch-case structure to select the appropriate scraper
+* Loops to process multiple URLs
 
-## Bedienung
+## Operation
 
 ### Installation
 
-#### 1. Die Umgebung (.venv) installieren:
+#### 1. Install the virtual environment (.venv):
 
 ```bash
 python -m venv venv
 ```
 
-#### 2. Die Umgebung aktivieren:
+#### 2. Activate the environment:
 
 ```bash
 # Windows
@@ -97,13 +86,13 @@ python -m venv venv
 . venv/bin/activate
 ```
 
-#### 3. Die benötigten Bibliotheken installieren:
+#### 3. Install the required libraries:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-#### 4. Das Skript ausführen:
+#### 4. Run the script:
 
 ```bash
 python main.py
@@ -111,54 +100,46 @@ python main.py
 
 ## Error-Handling
 
-* Nutzung von try-except-Blöcken zur Behandlung von HTTP-Fehlern und Datenbankfehlern.
-* Validierung der HTML-Inhalte vor der Verarbeitung.
-* Sicherstellung der Datenintegrität durch Verwendung von ON CONFLICT DO NOTHING bei der Datenbankeinfügung.
+* Use try-except blocks to handle HTTP errors and database errors.
+* Validate HTML content before processing.
+* Ensure data integrity by using ON CONFLICT DO NOTHING when inserting into the database.
 
-## Testfälle
+## Test Cases
 
-* Erfolgreiches Scraping: Daten werden korrekt von der Webseite extrahiert und in der Datenbank gespeichert.
-* HTTP-Fehler: Umgang mit Seiten, die nicht geladen werden können.
-* Fehlende Elemente: Behandlung von Artikeln, bei denen Titel, Veröffentlichungsdatum oder Autor fehlen.
+* Successful scraping: Data is correctly extracted from the website and stored in the database.
+* HTTP errors: Handling pages that cannot be loaded.
+* Missing elements: Handling articles that lack title, publication date, or author.
 
-### Liste der Haupttestfälle oder Verweise auf Testdokumentation.
+### List of Main Test Cases or References to Test Documentation
 
-* Testfall 1: Scraping einer funktionierenden Webseite.
-* Testfall 2: Umgang mit einer nicht erreichbaren Webseite.
-* Testfall 3: Verarbeitung einer Webseite mit fehlenden Artikeldetails.
+* Test Case 1: Scraping a functioning website.
+* Test Case 2: Handling an unreachable website.
+* Test Case 3: Processing a website with missing article details.
 
-## Integration und Sicherheit ##
+## Integration and Security
 
-### Implementierung
+### Implementation
 
-* Integration des Scrapers mit einer PostgreSQL-Datenbank zur Speicherung der gesammelten Daten.
-* Modulare Struktur zur einfachen Erweiterung um zusätzliche Webseiten.
+* Integration of the scraper with a PostgreSQL database for storing collected data.
+* Modular structure for easy extension to additional websites.
 
-### Sicherheit
+### Security
 
-* Absicherung der Datenbankverbindung durch sichere Speicherung der Zugangsdaten.
-* Robustheit gegenüber ungültigen oder unerwarteten HTML-Inhalten.
+* Securing the database connection by safely storing credentials.
+* Robustness against invalid or unexpected HTML content.
 
-## Reflexion ##
+## Reflection
 
-### Ergebnis ###
+### Result
 
-Das Skript ermöglicht die effiziente und automatische Sammlung von Artikeldaten von verschiedenen Nachrichtenwebseiten
-und deren Speicherung in einer PostgreSQL-Datenbank.
+The script enables efficient and automatic collection of article data from various news websites and stores it in a PostgreSQL database.
 
-### Zusammenarbeit ###
+### Collaboration
 
-Die Entwicklung des Skripts erfolgte durch laufende Verbesserungen und die Integration von Feedback.
+The development of the script involved continuous improvements and integration of feedback.
 
-Auch geholfen hat, dass wir direkt am Anfang, einen klaren Ablauf für das Script entworfen haben, bei dem alle Kriterien
-erfüllt wurden.
+It was also helpful that we designed a clear process for the script from the beginning, meeting all criteria.
 
-### Fazit ###
+### Conclusion
 
-Es war ein lehrreiches Projekt, bei dem viel über Datenbanken und deren Anwendung innerhalb der Skripte gelernt wurde.
-Auch in Bezug auf die OOP-Methode wurden wertvolle Erkenntnisse gewonnen. Die Zusammenarbeit war gut, und es hat Spass
-gemacht, mit solch kompetenten Menschen zusammenarbeiten zu dürfen.
-
-## Anhang
-
-* Weitere Ressourcen und Quellcode: https://git.gibb.ch/urs.dummermuth/inf-122-23n-sg2 
+It was an educational project where much was learned about databases and their application within scripts. Valuable insights were also gained regarding the OOP method. The collaboration was good, and it was enjoyable to work with such competent people.
