@@ -1,3 +1,5 @@
+# Scripting Module
+
 ## Purpose of the Script
 
 The script is designed to extract data from various news websites and store it in a PostgreSQL database. It enables semi-automatic collection of article data, including title, text, publication date, and author.
